@@ -29,6 +29,7 @@ import ScenarioInfoDrawer from './components/Panels/ScenarioInfoDrawer';
 import DiscoveryDashboard from './components/Pedagogical/DiscoveryDashboard';
 import DataDetailModal from './components/Panels/DataDetailModal';
 import ProjectFooter from './components/Common/ProjectFooter';
+import { estimateSpotPrice } from './utils/energyPricing';
 // Custom SVG Icons for mode selector and headers
 const BookOpen = ({ color }) => (
   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
@@ -97,51 +98,6 @@ const INSTALLED_WIND = 25789;
 const INSTALLED_SOLAR = 30437;
 const INSTALLED_THERMAL = 17260;
 const MAX_STEP_PUMPING = 5000;
-
-// Estimate wholesale spot price using Merit Order rules & Carbon Tax ETS pricing
-const estimateSpotPrice = (record) => {
-  if (!record) return 30;
-  const gaz = record.gaz || 0;
-  const fioul = record.fioul || 0;
-  const charbon = record.charbon || 0;
-  const imports = record.ech_physiques > 0 ? record.ech_physiques : 0;
-  const conso = record.consommation || 0;
-
-  let basePrice = 35; // Standard base nuclear/renewables price
-
-  if (charbon > 50 || fioul > 50) {
-    basePrice = 145; // Coal/Oil marginal plant sets price
-  } else if (gaz > 200) {
-    basePrice = 78; // Gas marginal plant sets price
-  } else if (imports > 1500) {
-    basePrice = 85; // High import dependence sets price
-  } else if (imports > 0) {
-    basePrice = 55; // Moderate imports
-  } else if (conso > 60000) {
-    basePrice = 62; // High hydro/nuclear marginal peaking
-  } else if (record.ech_physiques < -5000) {
-    basePrice = 24; // High export surplus depresses prices
-  }
-
-  // Carbon ETS Tax Penalty (~80€/tCO2)
-  let co2TaxImpact = 0;
-  if (charbon > 50) {
-    co2TaxImpact = 72; // Coal sets the carbon tax penalty
-  } else if (fioul > 50) {
-    co2TaxImpact = 56;
-  } else if (gaz > 200) {
-    co2TaxImpact = 32; // Gas sets the carbon tax penalty
-  }
-
-  // Grid stress penalty (in case of unresolved deficit / load shedding risk)
-  const gridStress = record.grid_stress || 0;
-  let stressPremium = 0;
-  if (gridStress > 0) {
-    stressPremium = Math.min(200, Math.round(gridStress / 50));
-  }
-
-  return basePrice + co2TaxImpact + stressPremium;
-};
 
 function DashboardLayout() {
   const { mode, timelineIndex, simulation, selectedRegion, setSelectedRegion, activeScenario, showDiscovery, setShowDiscovery } = useAppContext();
