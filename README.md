@@ -1,6 +1,6 @@
 # FranceJumeau
 
-> **Premier prix du Defend Hack 2** -- VivaTech 2026
+> 🏆 **Premier prix du Defend Hack 2** -- VivaTech 2026
 
 FranceJumeau est un prototype de **jumeau numérique interactif du système énergétique français**. Il aide à explorer le territoire, le mix électrique et les données de réseau à travers une carte et des tableaux de bord conçus pour rendre un système complexe plus lisible.
 
