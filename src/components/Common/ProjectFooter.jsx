@@ -21,13 +21,13 @@ export default function ProjectFooter() {
         href="https://xavier.trauchessec.fr"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Fait par Xavier Trauchessec  En savoir plus"
+        aria-label="Fait par Xavier Trauchessec - En savoir plus"
         style={{
           color: '#f1f5f9',
           textDecoration: 'none',
         }}
       >
-        Fait par <strong>Xavier Trauchessec</strong> <span aria-hidden="true">·</span> En savoir plus
+        Fait par <strong>Xavier Trauchessec</strong> <span aria-hidden="true">-</span> En savoir plus
       </a>
     </footer>
   );
