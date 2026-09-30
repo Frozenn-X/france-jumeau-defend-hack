@@ -19,7 +19,7 @@ jobs:
           node-version: 20
           cache: npm
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Lint (baseline debt, non-blocking)
         continue-on-error: true
         run: npm run lint
