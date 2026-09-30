@@ -1,0 +1,365 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Fond et surface */
+  --bg-primary: #0a0e1a;
+  --bg-secondary: #111827;
+  --bg-panel: rgba(17, 24, 39, 0.75);
+  --border-light: rgba(255, 255, 255, 0.1);
+
+  /* Sources d'énergie */
+  --color-nuclear: #818cf8;
+  --color-wind: #22d3ee;
+  --color-solar: #fbbf24;
+  --color-hydro: #3b82f6;
+  --color-gas: #f97316;
+  --color-thermal: #ef4444;
+  --color-bio: #34d399;
+  --color-battery: #a78bfa;
+
+  /* Échanges */
+  --color-export: #10b981;
+  --color-import: #f43f5e;
+
+  /* Ecowatt & CO2 */
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+
+  /* Textes */
+  --text-primary: #f9fafb;
+  --text-secondary: #9ca3af;
+  --text-accent: #60a5fa;
+
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow: hidden; /* Empêcher le scroll car dashboard plein écran */
+  background: var(--bg-primary);
+}
+
+/* Utilitaires Glassmorphism */
+.glass-panel {
+  background: var(--bg-panel);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Masquer les scrollbars */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Animations */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Typographie */
+h1, h2, h3, h4 {
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.5rem;
+}
+
+.text-xs { font-size: 0.75rem; line-height: 1rem; }
+.text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+.text-base { font-size: 1rem; line-height: 1.5rem; }
+.text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+.text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+.text-2xl { font-size: 1.5rem; line-height: 2rem; }
+
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+
+.text-secondary { color: var(--text-secondary); }
+.text-accent { color: var(--text-accent); }
+
+/* Layout Grid Utilities */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+.gap-2 { gap: 0.5rem; }
+.gap-4 { gap: 1rem; }
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+
+/* --- Infobulles KPI instantanées (Glassmorphism) --- */
+.kpi {
+  position: relative;
+}
+
+.kpi::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: rgba(17, 24, 39, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #f3f4f6;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  line-height: 1.4;
+  white-space: normal;
+  width: 240px;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 9999;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+}
+
+.kpi:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Alignement intelligent pour éviter les débordements */
+.kpi-first::after {
+  left: 0;
+  transform: translateX(0) translateY(4px);
+  text-align: left;
+}
+
+.kpi-first:hover::after {
+  transform: translateX(0) translateY(0);
+}
+
+.kpi-last::after {
+  left: auto;
+  right: 0;
+  transform: translateX(0) translateY(4px);
+  text-align: right;
+}
+
+.kpi-last:hover::after {
+  transform: translateX(0) translateY(0);
+}
+
+/* --- Fade-in animation for modals --- */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* --- Glossary term dotted underline hover --- */
+.glossary-term {
+  border-bottom: 1px dotted rgba(96, 165, 250, 0.5);
+  cursor: help;
+  transition: border-color 0.15s ease;
+}
+
+.glossary-term:hover {
+  border-bottom-color: var(--text-accent);
+}
+
+/* MapLibre custom popup overlays to eliminate stark white borders and tips */
+.maplibregl-popup-content {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.maplibregl-popup-tip {
+  display: none !important; /* Hide standard white triangle tip for seamless transparency */
+}
+
+.maplibregl-popup-close-button {
+  color: #9ca3af !important;
+  background: transparent !important;
+  border: none !important;
+  font-size: 16px !important;
+  padding: 4px 8px !important;
+  top: 8px !important;
+  right: 8px !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  line-height: 1 !important;
+  transition: all 0.2s ease !important;
+}
+
+.maplibregl-popup-close-button:hover {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Force popups and markers to be layered above the FlowLines canvas (which sits at z-index: 1) */
+.maplibregl-popup {
+  z-index: 100 !important;
+}
+.maplibregl-marker {
+  z-index: 50 !important;
+}
+
+/* Premium Pedagogical Buttons styling */
+.pedagogical-btn {
+  cursor: pointer;
+  padding: 8px 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 38px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(255, 255, 255, 0.02);
+  transform: scale(1);
+}
+
+.pedagogical-btn:active {
+  transform: scale(0.96) translateY(0);
+}
+
+/* Yellow Theme (Merit Order) */
+.btn-yellow {
+  border: 1px solid rgba(251, 191, 36, 0.25);
+  color: #fbbf24;
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.08), rgba(217, 119, 6, 0.02));
+}
+.btn-yellow:hover {
+  border-color: rgba(251, 191, 36, 0.7);
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.18), rgba(217, 119, 6, 0.05));
+  box-shadow: 0 0 15px rgba(251, 191, 36, 0.25), inset 0 0 8px rgba(251, 191, 36, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Blue Theme (Flux) */
+.btn-blue {
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  color: #60a5fa;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(29, 78, 216, 0.02));
+}
+.btn-blue:hover {
+  border-color: rgba(59, 130, 246, 0.7);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.18), rgba(29, 78, 216, 0.05));
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.25), inset 0 0 8px rgba(59, 130, 246, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Green Theme (Lexique) */
+.btn-green {
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: #10b981;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(4, 120, 87, 0.02));
+}
+.btn-green:hover {
+  border-color: rgba(16, 185, 129, 0.7);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.18), rgba(4, 120, 87, 0.05));
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.25), inset 0 0 8px rgba(16, 185, 129, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Purple Theme (Espace Citoyen) */
+.btn-purple {
+  border: 1px solid rgba(192, 132, 252, 0.25);
+  color: #c084fc;
+  background: linear-gradient(135deg, rgba(192, 132, 252, 0.08), rgba(126, 34, 206, 0.02));
+}
+.btn-purple:hover {
+  border-color: rgba(192, 132, 252, 0.7);
+  background: linear-gradient(135deg, rgba(192, 132, 252, 0.18), rgba(126, 34, 206, 0.05));
+  box-shadow: 0 0 15px rgba(192, 132, 252, 0.25), inset 0 0 8px rgba(192, 132, 252, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Sidebar Panels Layout and Responsiveness */
+.left-panel-container {
+  position: absolute;
+  top: 100px;
+  left: 20px;
+  bottom: 95px;
+  width: 310px; /* Reduced from 350px */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 10;
+  overflow-y: hidden;
+  padding-right: 4px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.right-panel-container {
+  position: absolute;
+  top: 100px;
+  right: 20px;
+  bottom: 95px;
+  width: 310px; /* Reduced from 350px */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 10;
+  overflow-y: hidden;
+  padding-right: 4px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (max-width: 1024px) {
+  .left-panel-container {
+    width: 270px;
+    left: 10px;
+  }
+  .right-panel-container {
+    width: 270px;
+    right: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .left-panel-container {
+    position: absolute;
+    top: 120px;
+    left: 10px;
+    width: calc(100% - 20px);
+    bottom: auto;
+    height: calc(40vh - 50px);
+    overflow-y: auto;
+  }
+  .right-panel-container {
+    position: absolute;
+    top: auto;
+    bottom: 20px;
+    right: 10px;
+    width: calc(100% - 20px);
+    height: calc(40vh - 50px);
+    overflow-y: auto;
+  }
+}
