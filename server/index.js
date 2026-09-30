@@ -22,7 +22,7 @@ import { getWeatherForAllCities, getWeatherHistory } from './services/weatherSer
 import { computeCorrelations, simulateWeatherChange } from './services/correlationService.js';
 import { generateNarration, generateStoryChain } from './services/narratorService.js';
 
-const app = express();
+export const app = express();
 const PORT = process.env.PORT || 3001;
 
 const __filename = fileURLToPath(import.meta.url);
@@ -282,6 +282,7 @@ app.get('/api/dashboard', async (req, res) => {
   }
 });
 
+if (process.env.NODE_ENV !== 'test') {
 // ─── Start server ──────────────────────────────────────────
 
 app.listen(PORT, async () => {
@@ -313,3 +314,5 @@ app.listen(PORT, async () => {
   console.log(`   GET /api/narration`);
   console.log(`   POST /api/simulate`);
 });
+
+}
