@@ -8,25 +8,26 @@ export default function ProjectFooter() {
         bottom: 3,
         zIndex: 12,
         maxWidth: 'calc(100vw - 40px)',
-        padding: '2px 6px',
-        background: 'rgba(10, 14, 26, 0.78)',
+        padding: '4px 8px',
+        background: 'rgba(4, 8, 18, 0.96)',
+        borderTop: '1px solid rgba(148, 163, 184, 0.32)',
         borderRadius: '4px',
-        fontSize: '10px',
-        lineHeight: 1.2,
+        fontSize: '12px',
+        fontWeight: 500,
+        lineHeight: 1.25,
       }}
     >
       <a
         href="https://xavier.trauchessec.fr"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Un projet de Xavier Trauchessec  Voir le portfolio"
+        aria-label="Fait par Xavier Trauchessec  En savoir plus"
         style={{
-          color: '#dbeafe',
-          textDecoration: 'underline',
-          textUnderlineOffset: '2px',
+          color: '#f1f5f9',
+          textDecoration: 'none',
         }}
       >
-        Xavier Trauchessec · Portfolio —
+        Fait par <strong>Xavier Trauchessec</strong> <span aria-hidden="true">·</span> En savoir plus
       </a>
     </footer>
   );
