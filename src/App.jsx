@@ -28,6 +28,7 @@ import HistoricalScenariosPanel from './components/Panels/HistoricalScenariosPan
 import ScenarioInfoDrawer from './components/Panels/ScenarioInfoDrawer';
 import DiscoveryDashboard from './components/Pedagogical/DiscoveryDashboard';
 import DataDetailModal from './components/Panels/DataDetailModal';
+import ProjectFooter from './components/Common/ProjectFooter';
 // Custom SVG Icons for mode selector and headers
 const BookOpen = ({ color }) => (
   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
@@ -697,6 +698,7 @@ function DashboardLayout() {
           <Timeline nationalData={national} forecastData={forecasts} />
         </div>
       </div>
+      <ProjectFooter />
       {/* Pedagogical Modals */}
       <DiscoveryDashboard />
       <DataDetailModal />
