@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from 'react';
-import { Marker, Popup } from 'react-map-gl/maplibre';
+import React, { useState, useMemo, useEffect } from 'react';
+import { Marker, Popup, useMap } from 'react-map-gl/maplibre';
 import { useMetropoles } from '../../hooks/useMetropoles';
 import { METRO_COORDS } from '../Panels/MetropoleDetail';
 import { useAppContext } from '../../context/AppContext';
@@ -8,6 +8,17 @@ export default function CityMarkers() {
   const { setDetailedItem, selectedCityName, setSelectedCityName, setSelectedRegion, setSelectedPlant } = useAppContext();
   const { data: metropoles, isLoading } = useMetropoles();
   const [hoveredCity, setHoveredCity] = useState(null);
+  const { current: map } = useMap();
+  const [zoom, setZoom] = useState(map ? map.getZoom() : 5.8);
+
+  useEffect(() => {
+    if (!map) return;
+    const updateZoom = () => setZoom(map.getZoom());
+    map.on('zoom', updateZoom);
+    return () => map.off('zoom', updateZoom);
+  }, [map]);
+
+  const markerScale = Math.min(1.35, Math.max(0.65, 1 + (zoom - 5.8) * 0.18));
 
   // Extract unique and latest records for each metropole
   const latestMetropoles = useMemo(() => {
@@ -85,8 +96,8 @@ export default function CityMarkers() {
                   setHoveredCity(null);
                 }}
                 style={{
-                  width: '16px',
-                  height: '16px',
+                  width: `${16 * markerScale}px`,
+                  height: `${16 * markerScale}px`,
                   borderRadius: '50%',
                   background: 'rgba(10, 14, 26, 0.95)',
                   border: '2px solid #ec4899', // Pink city color
@@ -100,8 +111,8 @@ export default function CityMarkers() {
                 }}
               >
                 <div style={{
-                  width: '6px',
-                  height: '6px',
+                  width: `${6 * markerScale}px`,
+                  height: `${6 * markerScale}px`,
                   borderRadius: '50%',
                   background: '#ffffff'
                 }} />

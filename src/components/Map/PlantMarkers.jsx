@@ -194,6 +194,8 @@ export default function PlantMarkers() {
     };
   }, [map]);
 
+  const markerScale = Math.min(1.35, Math.max(0.65, 1 + (zoom - 5.8) * 0.18));
+
   // Filter out aggregated generic nuclear plants from ODRÉ
   const otherInstallations = useMemo(() => {
     if (!installations) return [];
@@ -233,7 +235,7 @@ export default function PlantMarkers() {
         const coords = plant.coords;
         const status = getPlantStatus(plant, timelineIndex);
         
-        const size = Math.min(35, Math.max(20, (plant.capacity / 6000) * 15 + 20));
+        const size = Math.min(35, Math.max(20, (plant.capacity / 6000) * 15 + 20)) * markerScale;
         
         let markerColor = '#818cf8'; // Nominal blue/indigo
         let activeAnimation = 'nuclear-glow 3s infinite ease-in-out';
