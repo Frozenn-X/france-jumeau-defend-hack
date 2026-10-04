@@ -1,7 +1,7 @@
 export default function ProjectFooter() {
   return (
     <footer
-      aria-label="� propos du projet"
+      aria-label="À propos du projet"
       style={{
         position: 'absolute',
         right: 20,
@@ -15,8 +15,18 @@ export default function ProjectFooter() {
         fontSize: '12px',
         fontWeight: 500,
         lineHeight: 1.25,
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: '4px 8px',
       }}
     >
+      <a
+        href="/comprendre-electricite-en-france.html"
+        style={{ color: '#f1f5f9', textDecoration: 'underline' }}
+      >
+        Comprendre l'électricité en France
+      </a>
+      <span aria-hidden="true">·</span>
       <a
         href="https://xavier.trauchessec.fr"
         target="_blank"

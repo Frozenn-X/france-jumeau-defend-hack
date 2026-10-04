@@ -8,6 +8,8 @@ const site = 'https://hackaton-energie.trauchessec.fr/';
 const title = 'France Numérique Énergie';
 const description = "France Numérique Énergie est un jumeau numérique interactif pour comprendre le parcours de l'énergie en France, de la production à la consommation.";
 const html = readFileSync(join(dist, 'index.html'), 'utf8');
+const guide = readFileSync(join(dist, 'comprendre-electricite-en-france.html'), 'utf8');
+const guideUrl = `${site}comprendre-electricite-en-france.html`;
 const robots = readFileSync(join(dist, 'robots.txt'), 'utf8');
 const sitemap = readFileSync(join(dist, 'sitemap.xml'), 'utf8');
 
@@ -21,11 +23,18 @@ has(`<meta property="og:description" content="${description}"`, 'description Ope
 has(`<meta property="og:url" content="${site}"`, 'URL Open Graph');
 has(`<meta property="og:image" content="${site}social-preview.jpg"`, 'image Open Graph');
 has('<h1>France Numérique Énergie</h1>', 'texte HTML initial');
+has('<a href="/comprendre-electricite-en-france.html">', 'lien HTML vers le guide');
+assert.ok(guide.includes('<html lang="fr">'), 'langue française absente du guide');
+assert.ok(guide.includes('<h1>Comprendre le parcours de l\'électricité en France</h1>'), 'titre éditorial absent du guide');
+assert.ok(guide.includes(`<link rel="canonical" href="${guideUrl}"`), 'URL canonique du guide absente');
+assert.ok(guide.includes('<a class="action" href="/">'), 'retour vers la carte absent du guide');
+assert.ok(guide.includes('id="sources"'), 'sources et limites absentes du guide');
 assert.match(robots, /^User-agent: \*\r?\nAllow: \/\r?\n/m);
 assert.ok(robots.includes(`Sitemap: ${site}sitemap.xml`), 'sitemap absent de robots.txt');
 assert.match(sitemap, /<urlset xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9">/);
 assert.ok(sitemap.includes(`<loc>${site}</loc>`), 'URL canonique absente du sitemap');
-assert.equal((sitemap.match(/<loc>/g) ?? []).length, 1, 'le sitemap doit déclarer une seule page');
+assert.ok(sitemap.includes(`<loc>${guideUrl}</loc>`), 'guide absent du sitemap');
+assert.equal((sitemap.match(/<loc>/g) ?? []).length, 2, 'le sitemap doit déclarer les deux pages');
 
 const assets = readdirSync(join(dist, 'assets'));
 const script = html.match(/src="\/(assets\/index-[^"]+\.js)"/)?.[1];
