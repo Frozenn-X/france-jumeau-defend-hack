@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://hackaton-energie.trauchessec.fr/sitemap.xml
+Sitemap: https://francejumeau.trauchessec.fr/sitemap.xml

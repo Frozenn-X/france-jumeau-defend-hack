@@ -64,7 +64,7 @@ jobs:
       - name: Wait for the exact commit and smoke-test production
         env:
           EXPECTED_SHA: ${{ github.sha }}
-          SITE_URL: https://hackaton-energie.trauchessec.fr
+          SITE_URL: https://francejumeau.trauchessec.fr
         run: |
           for attempt in $(seq 1 90); do
             release=$(curl -fsS --max-time 10 "$SITE_URL/release-info.json?sha=$EXPECTED_SHA" || true)

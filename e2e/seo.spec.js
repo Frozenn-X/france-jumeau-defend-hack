@@ -38,7 +38,7 @@ test.describe('guide accessible sans JavaScript', () => {
     expect(response?.status()).toBe(200);
     await expect(page).toHaveTitle("Comprendre le parcours de l'électricité en France | France Numérique Énergie");
     await expect(page.getByRole('heading', { name: "Comprendre le parcours de l'électricité en France", level: 1 })).toBeVisible();
-    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://hackaton-energie.trauchessec.fr/comprendre-electricite-en-france.html');
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://francejumeau.trauchessec.fr/comprendre-electricite-en-france.html');
     await expect(page.getByRole('link', { name: 'Explorer la carte France Numérique Énergie' })).toHaveAttribute('href', '/');
   });
 });
@@ -48,8 +48,8 @@ test('le plan du site annonce les deux pages publiées', async ({ request }) => 
   const sitemap = await request.get('/sitemap.xml');
   expect(robots.ok()).toBeTruthy();
   expect(sitemap.ok()).toBeTruthy();
-  expect(await robots.text()).toContain('Sitemap: https://hackaton-energie.trauchessec.fr/sitemap.xml');
+  expect(await robots.text()).toContain('Sitemap: https://francejumeau.trauchessec.fr/sitemap.xml');
   const xml = await sitemap.text();
-  expect(xml).toContain('<loc>https://hackaton-energie.trauchessec.fr/</loc>');
-  expect(xml).toContain('<loc>https://hackaton-energie.trauchessec.fr/comprendre-electricite-en-france.html</loc>');
+  expect(xml).toContain('<loc>https://francejumeau.trauchessec.fr/</loc>');
+  expect(xml).toContain('<loc>https://francejumeau.trauchessec.fr/comprendre-electricite-en-france.html</loc>');
 });

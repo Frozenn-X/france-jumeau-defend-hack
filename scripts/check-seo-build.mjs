@@ -4,7 +4,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const dist = fileURLToPath(new URL('../dist/', import.meta.url));
-const site = 'https://hackaton-energie.trauchessec.fr/';
+const site = 'https://francejumeau.trauchessec.fr/';
 const title = 'France Numérique Énergie';
 const description = "France Numérique Énergie est un jumeau numérique interactif pour comprendre le parcours de l'énergie en France, de la production à la consommation.";
 const html = readFileSync(join(dist, 'index.html'), 'utf8');
@@ -23,6 +23,7 @@ has(`<meta property="og:description" content="${description}"`, 'description Ope
 has(`<meta property="og:url" content="${site}"`, 'URL Open Graph');
 has(`<meta property="og:image" content="${site}social-preview.jpg"`, 'image Open Graph');
 has('<h1>France Numérique Énergie</h1>', 'texte HTML initial');
+has('FranceJumeau est le nom du projet', 'nom du projet dans le HTML initial');
 has('<a href="/comprendre-electricite-en-france.html">', 'lien HTML vers le guide');
 assert.ok(guide.includes('<html lang="fr">'), 'langue française absente du guide');
 assert.ok(guide.includes('<h1>Comprendre le parcours de l\'électricité en France</h1>'), 'titre éditorial absent du guide');
