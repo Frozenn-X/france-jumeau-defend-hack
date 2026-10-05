@@ -1,6 +1,7 @@
 # Livraison continue du frontend
 
-Le frontend et l'API sont déployés séparément. Nginx sert
+Le frontend et l'API sont déployés séparément. Le domaine canonique est
+`https://francejumeau.trauchessec.fr/`. Nginx sert
 `/home/frozen/df-energie/dist`, qui pointe vers
 `/home/frozen/releases/current/dist`. L'API PM2 sur le port 3001 n'est
 ni reconstruite ni redémarrée par ce pipeline.
@@ -31,6 +32,12 @@ Le job GitHub « Verify automatic VPS deployment » attend le SHA public de
 `release-info.json` et échoue si la production ne publie pas le commit
 attendu. Aucun secret GitHub ni accès SSH entrant n'est nécessaire : le VPS
 lit le dépôt public et l'état de la CI, puis tire le code lui-même.
+
+Avant de fusionner un changement de domaine, installer la version correspondante
+de `ops/deploy-frontend.sh` sur le VPS et vérifier que Nginx sert directement
+le site sur le nouveau domaine avec un certificat valide. L'ancien domaine peut
+ensuite devenir une redirection permanente vers le domaine canonique, après les
+contrôles de santé et de contenu sur ce dernier.
 
 ## Exploitation
 

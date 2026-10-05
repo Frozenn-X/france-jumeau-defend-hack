@@ -9,7 +9,7 @@ releases=/home/frozen/releases
 builds=$releases/.builds
 current=$releases/current
 state=$releases/.ci-deploy-state
-site=https://hackaton-energie.trauchessec.fr
+site=https://francejumeau.trauchessec.fr
 api=https://api.github.com/repos/Frozenn-X/france-jumeau-defend-hack
 node_image=node:22-bookworm-slim@sha256:43ac6c60b8f89723f746e8a92ce91abd5017e627ce1ddfe4238355d3a30b772c
 force=0
@@ -38,7 +38,7 @@ previous=$(readlink -f "$current")
 [[ "$(readlink -f /home/frozen/df-energie/dist)" == "$previous/dist" ]]
 
 export GIT_SSH_COMMAND='ssh -i /home/frozen/.ssh/github_france_jumeau_ed25519 -o IdentitiesOnly=yes -o BatchMode=yes'
-git -C "$repo" fetch --quiet origin main-prod
+git -C "$repo" fetch --quiet origin refs/heads/main-prod:refs/remotes/origin/main-prod
 target=$(git -C "$repo" rev-parse "refs/remotes/origin/main-prod^{commit}")
 tree=$(git -C "$repo" rev-parse "$target^{tree}")
 [[ "$target" =~ ^[0-9a-f]{40}$ && "$tree" =~ ^[0-9a-f]{40}$ ]]
@@ -130,7 +130,7 @@ printf 'commit=%s\ntree=%s\ndeployed_at_utc=%s\n' \
 chmod -R a+rX "$release/dist"
 
 # Do not publish an older commit if main-prod moved during the build.
-git -C "$repo" fetch --quiet origin main-prod
+git -C "$repo" fetch --quiet origin refs/heads/main-prod:refs/remotes/origin/main-prod
 [[ "$(git -C "$repo" rev-parse "refs/remotes/origin/main-prod^{commit}")" == "$target" ]]
 
 ln -s "$release" "$next"
