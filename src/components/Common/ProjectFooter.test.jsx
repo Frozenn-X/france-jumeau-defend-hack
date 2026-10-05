@@ -3,8 +3,11 @@ import { render, screen } from '@testing-library/react';
 import ProjectFooter from './ProjectFooter';
 
 describe('ProjectFooter', () => {
-  it('expose un lien s�r vers la pr�sentation de son auteur', () => {
+  it('expose un lien sûr vers la présentation de son auteur', () => {
     render(<ProjectFooter />);
+
+    const guide = screen.getByRole('link', { name: /comprendre l'électricité en france/i });
+    expect(guide).toHaveAttribute('href', '/comprendre-electricite-en-france.html');
 
     const link = screen.getByRole('link', { name: /fait par xavier trauchessec.*en savoir plus/i });
     expect(link).toHaveAttribute('href', 'https://xavier.trauchessec.fr');

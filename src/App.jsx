@@ -429,7 +429,7 @@ function DashboardLayout() {
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
           <h1 style={{
-            fontSize: '20px',
+            fontSize: 'clamp(15px, 1.4vw, 20px)',
             fontWeight: '800',
             margin: 0,
             background: 'linear-gradient(135deg, #ffffff, #9ca3af)',
@@ -441,7 +441,7 @@ function DashboardLayout() {
             gap: '6px'
           }}>
             <LightningIcon size={18} color="#f59e0b" style={{ display: 'inline' }} />
-            <span>ÉnergieFrance</span>
+            <span>France Numérique Énergie</span>
           </h1>
           <ModeSelector />
           <HistoricalScenariosPanel />

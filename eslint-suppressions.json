@@ -1,0 +1,233 @@
+{
+  "server/db/localDb.js": {
+    "no-empty": {
+      "count": 1
+    },
+    "no-unused-vars": {
+      "count": 2
+    }
+  },
+  "server/index.js": {
+    "no-unused-vars": {
+      "count": 2
+    }
+  },
+  "server/services/narratorService.js": {
+    "no-unused-vars": {
+      "count": 1
+    }
+  },
+  "server/services/rteService.js": {
+    "no-unused-vars": {
+      "count": 1
+    }
+  },
+  "server/services/weatherService.js": {
+    "no-unused-vars": {
+      "count": 1
+    }
+  },
+  "src/App.jsx": {
+    "no-unused-vars": {
+      "count": 7
+    },
+    "react-hooks/set-state-in-effect": {
+      "count": 2
+    }
+  },
+  "src/components/Common/Icons.jsx": {
+    "no-unused-vars": {
+      "count": 1
+    }
+  },
+  "src/components/Controls/MapLayerSelector.jsx": {
+    "no-unused-vars": {
+      "count": 1
+    }
+  },
+  "src/components/Controls/ModeSelector.jsx": {
+    "no-unused-vars": {
+      "count": 1
+    }
+  },
+  "src/components/Controls/Timeline.jsx": {
+    "no-unused-vars": {
+      "count": 1
+    }
+  },
+  "src/components/Map/EnergyMapLayer.jsx": {
+    "no-unused-vars": {
+      "count": 2
+    }
+  },
+  "src/components/Map/FlowLines.jsx": {
+    "no-unused-vars": {
+      "count": 3
+    }
+  },
+  "src/components/Map/GridOverlay.jsx": {
+    "no-unused-vars": {
+      "count": 2
+    }
+  },
+  "src/components/Map/NeighborMarkers.jsx": {
+    "no-unused-vars": {
+      "count": 1
+    }
+  },
+  "src/components/Map/PlantMarkers.jsx": {
+    "no-unused-vars": {
+      "count": 1
+    }
+  },
+  "src/components/Map/RegionTooltip.jsx": {
+    "no-unused-vars": {
+      "count": 1
+    }
+  },
+  "src/components/Map/WeatherOverlay.jsx": {
+    "no-unused-vars": {
+      "count": 1
+    }
+  },
+  "src/components/Narrator/NarratorBar.jsx": {
+    "no-unused-vars": {
+      "count": 2
+    },
+    "react-hooks/set-state-in-effect": {
+      "count": 1
+    }
+  },
+  "src/components/Panels/CapacityPanel.jsx": {
+    "no-unused-vars": {
+      "count": 1
+    },
+    "no-useless-assignment": {
+      "count": 1
+    }
+  },
+  "src/components/Panels/CarbonGauge.jsx": {
+    "no-unused-vars": {
+      "count": 1
+    }
+  },
+  "src/components/Panels/CitizenHubModal.jsx": {
+    "no-unused-vars": {
+      "count": 3
+    },
+    "react-hooks/set-state-in-effect": {
+      "count": 3
+    }
+  },
+  "src/components/Panels/DataDetailModal.jsx": {
+    "no-undef": {
+      "count": 1
+    },
+    "no-unused-vars": {
+      "count": 1
+    },
+    "react-hooks/set-state-in-effect": {
+      "count": 1
+    }
+  },
+  "src/components/Panels/EcowattBadge.jsx": {
+    "no-unused-vars": {
+      "count": 1
+    }
+  },
+  "src/components/Panels/EducationalOverlay.jsx": {
+    "no-unused-vars": {
+      "count": 1
+    }
+  },
+  "src/components/Panels/EnergyFlowSankey.jsx": {
+    "no-unused-vars": {
+      "count": 1
+    }
+  },
+  "src/components/Panels/EnergyMixDonut.jsx": {
+    "no-unused-vars": {
+      "count": 2
+    }
+  },
+  "src/components/Panels/ExchangePanel.jsx": {
+    "no-unused-vars": {
+      "count": 1
+    }
+  },
+  "src/components/Panels/Glossary.jsx": {
+    "react-refresh/only-export-components": {
+      "count": 1
+    }
+  },
+  "src/components/Panels/HistoricalScenariosPanel.jsx": {
+    "no-unused-vars": {
+      "count": 1
+    }
+  },
+  "src/components/Panels/KPIBar.jsx": {
+    "no-unused-vars": {
+      "count": 1
+    }
+  },
+  "src/components/Panels/MeritOrderModal.jsx": {
+    "no-unused-vars": {
+      "count": 2
+    }
+  },
+  "src/components/Panels/MetropoleDetail.jsx": {
+    "no-unused-vars": {
+      "count": 1
+    },
+    "react-hooks/set-state-in-effect": {
+      "count": 1
+    },
+    "react-refresh/only-export-components": {
+      "count": 2
+    }
+  },
+  "src/components/Panels/RegionEnergyExplainer.jsx": {
+    "no-unused-vars": {
+      "count": 1
+    }
+  },
+  "src/components/Panels/ScenarioInfoDrawer.jsx": {
+    "no-unused-vars": {
+      "count": 1
+    }
+  },
+  "src/components/Panels/WeatherCorrelation.jsx": {
+    "no-unused-vars": {
+      "count": 1
+    }
+  },
+  "src/components/Simulation/SimulationPanel.jsx": {
+    "no-unused-vars": {
+      "count": 2
+    },
+    "no-useless-assignment": {
+      "count": 1
+    },
+    "react-hooks/set-state-in-effect": {
+      "count": 3
+    }
+  },
+  "src/context/AppContext.jsx": {
+    "no-unused-vars": {
+      "count": 1
+    },
+    "react-refresh/only-export-components": {
+      "count": 1
+    }
+  },
+  "src/hooks/useEnergyData.js": {
+    "no-unused-vars": {
+      "count": 2
+    }
+  },
+  "src/main-v2.jsx": {
+    "no-unused-vars": {
+      "count": 1
+    }
+  }
+}
