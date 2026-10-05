@@ -16,8 +16,8 @@ test('la carte affiche le nom du site et mène au guide', async ({ page }) => {
     await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(data) });
   });
   await page.goto('/');
-  await expect(page).toHaveTitle('France Numérique Énergie');
-  await expect(page.getByRole('heading', { name: 'France Numérique Énergie', level: 1 })).toBeVisible();
+  await expect(page).toHaveTitle("FranceJumeau — carte interactive de l'électricité en France");
+  await expect(page.getByRole('heading', { name: 'FranceJumeau', level: 1 })).toBeVisible();
   await expect.poll(() => apiRequests.some((url) => url.pathname === '/api/energy/national')).toBeTruthy();
   await expect.poll(() => apiRequests.some((url) => url.pathname === '/api/geojson/france-regions')).toBeTruthy();
   expect(apiRequests.every((url) => url.origin === 'http://127.0.0.1:4173')).toBeTruthy();
@@ -36,10 +36,22 @@ test.describe('guide accessible sans JavaScript', () => {
   test('sert un article HTML et un retour vers la carte', async ({ page }) => {
     const response = await page.goto('/comprendre-electricite-en-france.html');
     expect(response?.status()).toBe(200);
-    await expect(page).toHaveTitle("Comprendre le parcours de l'électricité en France | France Numérique Énergie");
+    await expect(page).toHaveTitle("Comprendre le parcours de l'électricité en France | FranceJumeau");
     await expect(page.getByRole('heading', { name: "Comprendre le parcours de l'électricité en France", level: 1 })).toBeVisible();
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://francejumeau.trauchessec.fr/comprendre-electricite-en-france.html');
-    await expect(page.getByRole('link', { name: 'Explorer la carte France Numérique Énergie' })).toHaveAttribute('href', '/');
+    await expect(page.getByRole('link', { name: 'Explorer la carte FranceJumeau' })).toHaveAttribute('href', '/');
+  });
+});
+
+test.describe('accueil accessible sans JavaScript', () => {
+  test.use({ javaScriptEnabled: false });
+
+  test('explique la carte et la limite des simulations', async ({ page }) => {
+    const response = await page.goto('/');
+    expect(response?.status()).toBe(200);
+    await expect(page.getByRole('heading', { name: "FranceJumeau : carte interactive de l'électricité en France", level: 1 })).toBeVisible();
+    await expect(page.getByText('les scénarios simulés ne sont pas des mesures du réseau', { exact: false })).toBeVisible();
+    await expect(page.getByRole('link', { name: "Comprendre le parcours de l'électricité en France" })).toHaveAttribute('href', '/comprendre-electricite-en-france.html');
   });
 });
 
