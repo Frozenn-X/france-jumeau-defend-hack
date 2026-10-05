@@ -441,7 +441,7 @@ function DashboardLayout() {
             gap: '6px'
           }}>
             <LightningIcon size={18} color="#f59e0b" style={{ display: 'inline' }} />
-            <span>France Numérique Énergie</span>
+            <span>FranceJumeau</span>
           </h1>
           <ModeSelector />
           <HistoricalScenariosPanel />
@@ -508,7 +508,7 @@ function DashboardLayout() {
           </div>
           <div style={{ fontSize: '10.5px', color: 'var(--text-secondary)', marginTop: '3px', lineHeight: '1.3' }}>
             {mode === 'pedagogical'
-              ? 'Parcours simplifié et interactif pour s\'initier à l\'équilibre énergétique.'
+              ? 'Explorez la production et la consommation d\'électricité par région sur la carte.'
               : mode === 'expert'
                 ? 'Analyse technique : filières de production, réseau haute tension et corrélations météo.'
                 : 'Simulez l\'impact de scénarios climatiques et frontaliers sur le réseau.'}
